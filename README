@@ -1,0 +1,83 @@
+****************
+* Assignment #1 
+* Class : CS 321 
+* Date : 09/03/2019
+* Name : Sajia Zafreen
+**************** 
+
+## OVERVIEW:
+
+ This program is a Cache implementation using linked list. It has a Cache class and a Test class.
+ The Cache class stores generic objects and works as a storage memory. The Test class tests the 
+ Cache implementation by reading a file data.
+ 
+ ## INCLUDED FILES:
+ 
+ * Cache.java - source file
+ * Test.java - source file
+ * README - this file
+ 
+ 
+ ## COMPILING AND RUNNING:
+ 
+ To test the Cache implementation first compile the Test class.
+ 
+ $ javac Test.java
+ 
+ Then run the compiled Test class entering 1 or 2 for how many Cache levels, the size of the 
+ Caches, and then the file name. For the Two-level Cache, level-one entries must be lower than
+ level-two entries.
+ 
+ For One-Level Cache
+ $ java Test [1] [Level-one-Cache size] [filename]
+ 
+ For Two-Level Cache
+ $ java Test [2] [Level-one-Cache-size] [Level-two-Cache-size] [filename]
+ 
+ 
+ ## PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+ 
+ The Cache stores objects (any object as it is generic). It works as a storage in memory. If 
+ a data item has a copy in cache, Cache application can read this data item from the cache 
+ directly. Whenever the application finds data in the Cache that matches the file, it is called
+ a hit. This data will be moved to the first position of the Cache. It is called the MRU scheme.
+ However, if the Cache doesn't have the data it is a miss and this data is added to the top of 
+ the Cache. If Cache is full, the last entry data of Cache will be removed before a new entry 
+ is added.
+ 
+ One-Level-Cache: A single Level Cache.
+ Two-Level-Cache: The two level Cache has two levels. However, the level two is behind the level
+ one. It means data will always be searched in the first level Cache. When the first level Cache
+ misses, the 2nd level Cache is searched. If it is a hit in second level the data is moved to the 
+ top of 2nd level and added to the top of 1st level. If second level also misses, data is added
+ in the both Caches at the top. It means the second level always has the first level Cache data 
+ and additional data. That is why the second level Cache must have larger entry size than the 
+ first level Cache. It is called an inclusion property.
+ 
+ Hit Ratio: 
+ HR: (global) cache hit ratio 
+ HR1: 1st-level cache hit ratio 
+ HR2: 2nd-level cache hit ratio 
+ NH: total number of cache hits 
+ NH1: number of 1st-level cache hits
+ NH2: number of 2nd-level cache hits 
+ NR: total references to cache 
+ NR1: number of references to 1st-level cache 
+ NR2: number of references to 2nd-level cache (= number of 1st-level cache misses)
+      • One-level cache: HR = NH/NR
+      • Two-level cache: HR1 = NH1/NR1,  HR2 = NH2/NR2 ,HR = (NH1+NH2)/NR1
+ 
+ The Test class uses the above Cache description and tests the Cache implementation using a file data.
+ The test class then prints the Global Hit ratio and 1st level Cache hits and hit ratio and 2nd level
+ Cache hits and hit ratio (if two-level Cache).
+ 
+ 
+ 
+ ## DISCUSSION:
+ 
+ After writing the program the challenge I faced is to parse the file. I used StringTokenizer which didn't
+ work for me. I had far larger global references and hits. After that I used split method for white 
+ spaces and it worked fine. However, even though my hits in level one and level two are exactly same 
+ as the provided sample output of Encyclopedia.txt file, I have one more global references than the sample 
+ output. I couldn't figure out why. However, the small.txt file output is exactly same as the sample 
+ output. 
